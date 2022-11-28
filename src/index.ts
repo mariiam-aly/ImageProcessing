@@ -5,9 +5,8 @@ const app = express();
 const port = 3000;
 
 app.use('/api', routes);
-app.get('/api',  (req, res) => {
-
-  res.send(`server started at localhost:${port}`)
+app.get('/api', (req: express.Request, res: express.Response): void => {
+  res.send(`server started at localhost:${port}`);
 });
 
 app.listen(port, () => {

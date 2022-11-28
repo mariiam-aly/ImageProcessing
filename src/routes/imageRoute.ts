@@ -5,8 +5,23 @@ const routes = express.Router();
 /*this end-point acts depending on the validity of the parameters 
 and the existence of the same required image of same  dimentions */
 /*displayes either: error, new resized image, an already existing resized image */
-routes.get('/images', (req, res) => {
-  const imagePath = `/Users/mariamaly/projects/ImageProcessing/assets/full/${req.query.fileName}.jpeg`;
+async function newImg(
+  req: express.Request,
+  res: express.Response,
+  newImageName: string,
+  newImagePath: string
+): Promise<void> {
+  await reSize(
+    `./assets/full/${req.query.fileName}.jpeg`,
+    `./assets/thumb/${newImageName}.jpeg`
+  ).then(() => {
+    res.sendFile(newImagePath);
+  });
+}
+routes.get('/images', (req: express.Request, res: express.Response): void => {
+  let str: string = process.cwd();
+
+  const imagePath = `${str}/assets/full/${req.query.fileName}.jpeg`;
 
   if (!fs.existsSync(imagePath)) {
     res.send('File name does not exist');
@@ -17,18 +32,12 @@ routes.get('/images', (req, res) => {
     res.send('please enter valid dimentions');
   } else {
     const newImageName = `${req.query.fileName}${req.query.width}x${req.query.height}`;
-    const newImagePath = `/Users/mariamaly/projects/ImageProcessing/assets/thumb/${newImageName}.jpeg`;
+    const newImagePath = `${str}/assets/thumb/${newImageName}.jpeg`;
 
     if (fs.existsSync(newImagePath)) {
       res.sendFile(newImagePath);
     } else {
-      setTimeout(function () {
-        res.sendFile(newImagePath);
-      }, 1000);
-      reSize(
-        `./assets/full/${req.query.fileName}.jpeg`,
-        `./assets/thumb/${newImageName}.jpeg`
-      );
+      newImg(req, res, newImageName, newImagePath);
     }
   }
 });
