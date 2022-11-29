@@ -52,13 +52,13 @@ function newImg(req, res, newImageName, newImagePath) {
     });
 }
 routes.get('/images', (req, res) => {
-    let str = process.cwd();
+    const str = process.cwd();
     const imagePath = `${str}/assets/full/${req.query.fileName}.jpeg`;
     if (!fs.existsSync(imagePath)) {
         res.send('File name does not exist');
     }
-    else if (!(req.query.width >= 0) ||
-        !(req.query.height >= 0)) {
+    else if (!(req.query.width >= 1) ||
+        !(req.query.height >= 1)) {
         res.send('please enter valid dimentions');
     }
     else {

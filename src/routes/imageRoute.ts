@@ -31,8 +31,8 @@ routes.get('/images', (req: express.Request, res: express.Response): void => {
   if (!fs.existsSync(imagePath)) {
     res.send('File name does not exist');
   } else if (
-    !((req.query.width as unknown as number) >= 0) ||
-    !((req.query.height as unknown as number) >= 0)
+    !((req.query.width as unknown as number) >= 1) ||
+    !((req.query.height as unknown as number) >=1)
   ) {
     res.send('please enter valid dimentions');
   } else {
