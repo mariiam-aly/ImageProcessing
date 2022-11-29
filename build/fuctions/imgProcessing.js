@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sharp_1 = __importDefault(require("sharp"));
 /*this function takes the path of the file required to be resized
 /and the path intended for the new resized image*/
-function reSize(fileName, newImage) {
+function reSize(fileName, newImage, width, height) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield (0, sharp_1.default)(fileName).resize(300, 200).toFile(newImage);
+        yield (0, sharp_1.default)(fileName).resize(width, height).toFile(newImage);
         return newImage;
     });
 }

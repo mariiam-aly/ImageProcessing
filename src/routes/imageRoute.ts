@@ -11,15 +11,20 @@ async function newImg(
   newImageName: string,
   newImagePath: string
 ): Promise<void> {
+  const width: number = parseInt(req.query.width as unknown as string);
+  const height: number = parseInt(req.query.height as unknown as string);
+
   await reSize(
     `./assets/full/${req.query.fileName}.jpeg`,
-    `./assets/thumb/${newImageName}.jpeg`
+    `./assets/thumb/${newImageName}.jpeg`,
+    width,
+    height
   ).then(() => {
     res.sendFile(newImagePath);
   });
 }
 routes.get('/images', (req: express.Request, res: express.Response): void => {
-  let str: string = process.cwd();
+  const str: string = process.cwd();
 
   const imagePath = `${str}/assets/full/${req.query.fileName}.jpeg`;
 

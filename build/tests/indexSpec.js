@@ -20,7 +20,7 @@ let str = process.cwd();
 describe('resize image', () => {
     it('takes image path and returns resized image path', () => {
         () => __awaiter(void 0, void 0, void 0, function* () {
-            const imagePath = yield (0, imgProcessing_1.default)(`${str}/assets/full/fjord.jpeg`, `${str}/assets/thumb/fjord.jpeg`);
+            const imagePath = yield (0, imgProcessing_1.default)(`${str}/assets/full/fjord.jpeg`, `${str}/assets/thumb/fjord.jpeg`, 100, 100);
             expect(imagePath).toBe(`${str}/assets/thumb/fjord.jpeg`);
         });
     });

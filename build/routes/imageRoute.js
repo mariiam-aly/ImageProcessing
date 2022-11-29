@@ -44,7 +44,9 @@ and the existence of the same required image of same  dimentions */
 /*displayes either: error, new resized image, an already existing resized image */
 function newImg(req, res, newImageName, newImagePath) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield (0, imgProcessing_1.default)(`./assets/full/${req.query.fileName}.jpeg`, `./assets/thumb/${newImageName}.jpeg`).then(() => {
+        const width = parseInt(req.query.width);
+        const height = parseInt(req.query.height);
+        yield (0, imgProcessing_1.default)(`./assets/full/${req.query.fileName}.jpeg`, `./assets/thumb/${newImageName}.jpeg`, width, height).then(() => {
             res.sendFile(newImagePath);
         });
     });

@@ -3,9 +3,11 @@ import sharp from 'sharp';
 /and the path intended for the new resized image*/
 export default async function reSize(
   fileName: string,
-  newImage: string
+  newImage: string,
+  width: number,
+  height: number
 ): Promise<string> {
-  await sharp(fileName).resize(300, 200).toFile(newImage);
+  await sharp(fileName).resize(width, height).toFile(newImage);
 
   return newImage;
 }

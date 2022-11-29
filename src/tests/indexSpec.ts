@@ -4,14 +4,16 @@ import app from '../index';
 
 const main = supertest(app);
 
-let str: string =process.cwd();
+const str: string = process.cwd();
 
 describe('resize image', (): void => {
   it('takes image path and returns resized image path', (): void => {
     async (): Promise<void> => {
-      const imagePath:string = await reSize(
+      const imagePath: string = await reSize(
         `${str}/assets/full/fjord.jpeg`,
-        `${str}/assets/thumb/fjord.jpeg`
+        `${str}/assets/thumb/fjord.jpeg`,
+        100,
+        100
       );
       expect(imagePath).toBe(`${str}/assets/thumb/fjord.jpeg`);
     };
